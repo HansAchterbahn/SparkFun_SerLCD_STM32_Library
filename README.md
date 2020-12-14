@@ -1,5 +1,9 @@
 # SparkFun SerLCD Library for STM32
 
+## Important, important, important!
+
+This library was moved to https://gitlab.gwdg.de/mario.hesse/sparkfun-serlcd-library-for-stm32. Here you can only see the old version from 12/10/202020.
+
 
 ## Fork from SparkFun
 
