@@ -307,14 +307,14 @@ uint8_t displayWrite(uint8_t b)
  * @retval	status 	- 0...OK, other...error
  *
  */
-uint8_t displayWriteString(char *buffer, uint16_t size)
+uint8_t displayWriteString(char *buffer)
 {
 	uint8_t retval = LCD_OK;
 
 	// transmission of data stream
-	if(HAL_I2C_Master_Transmit(_i2cHandler, DISPLAY_ADDRESS1<<1, buffer, size, 100) != HAL_OK)		// transmit data
+	if(HAL_I2C_Master_Transmit(_i2cHandler, DISPLAY_ADDRESS1<<1, buffer, strlen(buffer), 100) != HAL_OK)		// transmit data
 	  retval = LCD_ERROR;
-	HAL_Delay(50); //This takes a bit longer
+	HAL_Delay(10); //This takes a bit longer
 
     return retval;
 }
@@ -544,7 +544,7 @@ uint8_t displayDisableSystemMessages()
  * @param  	b 		- 0...255
  * @retval	status 	- 0...OK, other...error
  */
-uint8_t displaySetBacklight(uint8_t r, uint8_t g, uint8_t b)
+uint8_t displaySetBacklight(uint16_t r, uint16_t g, uint16_t b)
 {
 	uint8_t retval = LCD_OK;
 
@@ -559,9 +559,9 @@ uint8_t displaySetBacklight(uint8_t r, uint8_t g, uint8_t b)
 	// create i2c data stream
     uint8_t TransmitData[10] = {SPECIAL_COMMAND,								//Send special command character
     						    LCD_DISPLAYCONTROL |(_displayControl & ~LCD_DISPLAYON), // turn display off
-    						    SETTING_COMMAND, (128 + r),						// red: 0...100% ~ 0...29
-    						    SETTING_COMMAND, (158 + g), 					// green: 0...100% ~ 0...29
-							    SETTING_COMMAND, (188 + b), 					// blue: 0...100% ~ 0...29
+    						    SETTING_COMMAND, (128 + (uint8_t)r),						// red: 0...100% ~ 0...29
+    						    SETTING_COMMAND, (158 + (uint8_t)g), 					// green: 0...100% ~ 0...29
+							    SETTING_COMMAND, (188 + (uint8_t)b), 					// blue: 0...100% ~ 0...29
 								SPECIAL_COMMAND,                      			//Send special command character
 								LCD_DISPLAYCONTROL | (_displayControl |= LCD_DISPLAYON)}; // turn display off as before
 

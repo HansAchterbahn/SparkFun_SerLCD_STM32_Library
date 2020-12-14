@@ -81,7 +81,7 @@ uint8_t displayNoAutoscroll();
 /* write on the display */
 uint8_t displayClear();
 uint8_t displayWrite(uint8_t b);
-uint8_t displayWriteString(char *buffer, uint16_t size);
+uint8_t displayWriteString(char *buffer);
 uint8_t displayCreateChar(uint8_t location, uint8_t *charmap);
 uint8_t displayWriteChar(uint8_t location);
 
@@ -100,7 +100,7 @@ uint8_t displayEnableSystemMessages();
 uint8_t displayDisableSystemMessages();
 
 /* display properties */
-uint8_t displaySetBacklight(uint8_t r, uint8_t g, uint8_t b);
+uint8_t displaySetBacklight(uint16_t r, uint16_t g, uint16_t b);
 uint8_t displaySetFastBacklight(uint8_t r, uint8_t g, uint8_t b);
 uint8_t displaySetContrast(uint8_t new_val);
 uint8_t displaySetAddress(uint8_t new_addr);
